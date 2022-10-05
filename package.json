@@ -1,0 +1,22 @@
+{
+  "name": "create-vute",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "bin": {
+    "create-vute": "index.js"
+  },
+  "scripts": {
+    "dev": "unbuild --stub"
+  },
+  "engines": {
+    "node": "^14.18.0 || >=16.0.0"
+  },
+  "repository": {
+    "type": ""
+  },
+  "keywords": [],
+  "author": "Windy",
+  "license": "ISC"
+}
