@@ -1,22 +1,42 @@
 {
-  "name": "create-vute",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "type": "module",
-  "bin": {
-    "create-vute": "index.js"
-  },
-  "scripts": {
-    "dev": "unbuild --stub"
-  },
-  "engines": {
-    "node": "^14.18.0 || >=16.0.0"
-  },
-  "repository": {
-    "type": ""
-  },
-  "keywords": [],
-  "author": "Windy",
-  "license": "ISC"
+    "name": "create-vute",
+    "version": "1.0.0",
+    "description": "vute-cli",
+    "type": "module",
+    "scripts": {
+        "prettier": "prettier --write .",
+        "lint": "eslint --ext .js,.jsx,.ts,.d.ts,.tsx --fix --quiet ./"
+    },
+    "bin": {
+        "create-vute": "index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/estoi/create-vute.git"
+    },
+    "bugs": {
+        "url": "https://github.com/estoi/create-vute/issues"
+    },
+    "homepage": "https://github.com/estoi/create-vute",
+    "keywords": [
+        "vite",
+        "cli",
+        "vue"
+    ],
+    "author": "Windy",
+    "license": "ISC",
+    "devDependencies": {
+        "chalk": "^5.0.1",
+        "commander": "^9.4.1",
+        "cross-spawn": "^7.0.3",
+        "eslint": "^8.24.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-prettier": "^4.2.1",
+        "gradient-string": "^2.0.2",
+        "minimist": "^1.2.6",
+        "ora": "^6.1.2",
+        "prettier": "^2.7.1",
+        "prompts": "^2.4.2"
+    },
+    "dependencies": {}
 }

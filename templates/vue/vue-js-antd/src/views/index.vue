@@ -1,0 +1,17 @@
+<script setup></script>
+<template>
+    <div class="wrapper">
+        <router-link to="/about">
+            <a-button type="primary">About</a-button>
+        </router-link>
+    </div>
+</template>
+<style lang="less">
+.wrapper {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+</style>
