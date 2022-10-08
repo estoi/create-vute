@@ -11,6 +11,8 @@ import chalk from 'chalk'
 import { execSync } from 'child_process'
 import ora from 'ora'
 import path from 'node:path'
+import pkg from '../utils/constant.cjs'
+const { PACKAGE_VERSION } = pkg
 
 const argv = minimist(process.argv.slice(2), { string: ['_'] })
 
@@ -27,22 +29,22 @@ const FRAMEWORKS = [
                 color: chalk.yellow,
                 variants: [
                     {
-                        name: 'element-ui',
+                        name: 'vue-js-element',
                         display: 'Element-ui',
                         color: chalk.blue
                     },
                     {
-                        name: 'ant-design-vue',
+                        name: 'vue-js-antd',
                         display: 'Ant-Design-Vue',
                         color: chalk.blue
                     },
                     {
-                        name: 'naive-ui',
+                        name: 'vue-js-naive',
                         display: 'Naive-ui',
                         color: chalk.blue
                     },
                     {
-                        name: 'default',
+                        name: 'vue-js',
                         display: 'default',
                         color: chalk.gray
                     }
@@ -69,7 +71,7 @@ const FRAMEWORKS = [
                         color: chalk.blue
                     },
                     {
-                        name: 'default',
+                        name: 'vue-ts',
                         display: 'default',
                         color: chalk.gray
                     }
@@ -168,7 +170,7 @@ const referenceGradient = [...gradientColors, ...[...gradientColors].reverse(), 
 
 async function init() {
     program
-		.version(`version is ${require('../package.json').version}`)
+        .version(`当前版本：v${PACKAGE_VERSION}`)
         .description('初始化项目   📑  📑')
         .action(async () => {
             const text = `
@@ -197,11 +199,12 @@ async function init() {
                         {
                             name: 'overwrite',
                             type: () =>
-                                !fs.existsSync(targetDir) || isEmpty(targetDir) ? null : 'confirm',
+                                !fs.existsSync(targetDir) || isEmpty(targetDir) ? null : 'text',
                             message:
                                 '🚨 ' +
                                 (targetDir === '.' ? '当前目录' : `目标目录 "${targetDir}"`) +
-                                '不是空的目录, 请删除该目录后再次执行 🚨'
+                                '不是空的目录, 请删除该目录后再次执行 🚨',
+                            onState: () => process.exit(1)
                         },
                         {
                             type: (_, { overwrite }) => {
@@ -274,28 +277,42 @@ async function init() {
                         }
                     }
                 )
-				const frames = getIntroAnimFrames()
+                const frames = getIntroAnimFrames()
                 const intro = await ora({
-					spinner: {
-						interval: 30,
-						frames
-					},
-					text: `▶ 复制模板`
-				})
+                    spinner: {
+                        interval: 30,
+                        frames
+                    },
+                    text: `▶ 复制模板`
+                })
                 intro.start()
                 await sleep((frames.length - 1) * intro.interval)
-				intro.stop()
-				const spinner = ora({
-					spinner: {
-						interval: 80,
-						frames: getIntroAnimFrames()
-					},
-					text: `▶ 复制模板`
-				})
-				spinner.start()
+                intro.stop()
+                const spinner = ora({
+                    spinner: {
+                        interval: 80,
+                        frames: getIntroAnimFrames()
+                    },
+                    text: `▶ 复制模板`
+                })
+                spinner.start()
 
-				const dest = path.resolve(process.cwd(), result.projectName)
-				console.log(dest)
+                const dest = path.resolve(process.cwd(), result.projectName)
+                if (!fs.existsSync(dest)) {
+                    const { projectName, framework, variant, ui, package: _pkg } = result
+                    fs.mkdirSync(projectName)
+                    
+                    const templateDir = `templates/${framework.name}/${ui}`
+                    
+                    await copyTemplate(templateDir, dest)
+                    spinner.stop()
+                    console.log(gradient.fruit('\n ✨✨✨✨✨✨✨✨✨✨✨✨ 项目创建成功! ✨✨✨✨✨✨✨✨✨✨✨✨ \n'))
+                } else {
+                    console.log(
+                        gradient.atlas('🚨 ' + dest + '不是空的目录, 请删除该目录后再次执行 🚨')
+                    )
+                    process.exit(1)
+                }
             } catch (call) {
                 console.log('❌' + call.message)
                 process.exit(1)
@@ -356,6 +373,28 @@ function getIntroAnimFrames() {
         frames.push([...leadingSpacesArr, ...gradientArr].join(''))
     }
     return frames
+}
+
+function copyTemplate(source, target) {
+    const _ignoreFiles = ['.vscode', 'node_modules']
+    const path = fs.readdirSync(source).filter(file => !_ignoreFiles.includes(file))
+    path.forEach((fileName) => {
+        const filePath = `${source}/${fileName}`
+        const targetFilePath = `${target}/${fileName}`
+        const stat = fs.statSync(filePath)
+        if (stat.isFile()) {
+            fs.copyFileSync(filePath, targetFilePath)
+        } else {
+            mkDir(targetFilePath)
+            copyTemplate(filePath, targetFilePath)
+        }
+    })
+}
+
+function mkDir(projectDir) {
+    if (!fs.existsSync(projectDir)) {
+        fs.mkdirSync(projectDir)
+    }
 }
 
 init().catch((err) => console.error(err))

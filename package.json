@@ -8,7 +8,7 @@
         "lint": "eslint --ext .js,.jsx,.ts,.d.ts,.tsx --fix --quiet ./"
     },
     "bin": {
-        "create-vute": "index.js"
+        "create-vute": "./bin/index.js"
     },
     "repository": {
         "type": "git",
