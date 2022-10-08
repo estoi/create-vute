@@ -23,8 +23,8 @@
         "cli",
         "vue"
     ],
-    "author": "Windy",
-    "license": "ISC",
+    "author": "estoi",
+    "license": "MIT",
     "devDependencies": {
         "chalk": "^5.0.1",
         "commander": "^9.4.1",
