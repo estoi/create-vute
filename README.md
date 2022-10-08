@@ -19,7 +19,13 @@
 ## Install
 
 ```sh
-npm install -g create-vute
+$ npm install -g create-vute
+```
+
+## Usage
+
+```sh
+$ create-vute
 ```
 
 ## Author
