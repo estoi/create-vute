@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { computed } from 'vue'
 import { darkTheme } from 'naive-ui'
 import { usePublicStore } from '/@/store'

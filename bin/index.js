@@ -89,17 +89,17 @@ const FRAMEWORKS = [
                 color: chalk.yellow,
                 variants: [
                     {
-                        name: 'ant-design',
+                        name: 'react-js-antd',
                         display: 'Ant-Design',
                         color: chalk.blue
                     },
                     {
-                        name: 'material-ui',
+                        name: 'react-js-material',
                         display: 'Material-ui',
                         color: chalk.blue
                     },
                     {
-                        name: 'default',
+                        name: 'react-js',
                         display: 'default',
                         color: chalk.gray
                     }
@@ -111,17 +111,17 @@ const FRAMEWORKS = [
                 color: chalk.blue,
                 variants: [
                     {
-                        name: 'ant-design',
+                        name: 'react-ts-antd',
                         display: 'Ant-Design',
                         color: chalk.blue
                     },
                     {
-                        name: 'material-ui',
+                        name: 'react-ts-material',
                         display: 'Material-ui',
                         color: chalk.blue
                     },
                     {
-                        name: 'default',
+                        name: 'react-ts',
                         display: 'default',
                         color: chalk.gray
                     }

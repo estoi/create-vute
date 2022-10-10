@@ -34,7 +34,6 @@
         "unplugin-icons": "^0.14.11",
         "unplugin-vue-components": "^0.22.8",
         "vite": "^3.1.0",
-        "vite-aliases": "^0.9.2",
         "vite-plugin-compression": "^0.5.1",
         "vite-plugin-inspect": "^0.7.5",
         "vite-plugin-pages": "^0.26.0",

@@ -27,6 +27,7 @@ export function createVitePlugins() {
     vitePlugins.push(AutoRegistryComponents())
     // 自动引入依赖
     vitePlugins.push(AutoImportDeps())
+    // 自动引入icon
     vitePlugins.push(AutoImportIcons())
     vitePlugins.push(Inspect())
 
