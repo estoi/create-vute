@@ -60,17 +60,17 @@ const FRAMEWORKS = [
                 color: chalk.blue,
                 variants: [
                     {
-                        name: 'element-ui',
+                        name: 'vue-ts-element',
                         display: 'Element-ui',
                         color: chalk.blue
                     },
                     {
-                        name: 'ant-design-vue',
+                        name: 'vue-ts-antd',
                         display: 'Ant-Design-Vue',
                         color: chalk.blue
                     },
                     {
-                        name: 'naive-ui',
+                        name: 'vue-ts-naive',
                         display: 'Naive-ui',
                         color: chalk.blue
                     },
