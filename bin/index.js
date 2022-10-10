@@ -11,10 +11,14 @@ import chalk from 'chalk'
 import { execSync } from 'child_process'
 import ora from 'ora'
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import pkg from '../utils/constant.cjs'
 const { PACKAGE_VERSION } = pkg
 
 const argv = minimist(process.argv.slice(2), { string: ['_'] })
+
+const __filenameNew = fileURLToPath(import.meta.url)
+const __dirnameNew = path.dirname(__filenameNew)
 
 const defaultProjectName = 'vute-project'
 
@@ -296,13 +300,12 @@ async function init() {
                     text: `▶ 复制模板`
                 })
                 spinner.start()
-
                 const dest = path.resolve(process.cwd(), result.projectName)
                 if (!fs.existsSync(dest)) {
-                    const { projectName, framework, variant, ui, package: _pkg } = result
+                    const { projectName, framework, ui, package: _pkg } = result
                     fs.mkdirSync(projectName)
                     
-                    const templateDir = `templates/${framework.name}/${ui}`
+                    const templateDir = path.join(__dirnameNew, `../templates/${framework.name}/${ui}`)
                     
                     await copyTemplate(templateDir, dest)
                     spinner.stop()
